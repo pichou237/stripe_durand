@@ -26,7 +26,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-4r-zsa!v(=2=j5wl0o!l2dvg)5^n=9#9a58w46e=%+m5zvim94'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 # ALLOWED_HOSTS = ["systeme-paiement-durand.onrender.com"]
 ALLOWED_HOSTS = ['.onrender.com', '127.0.0.1', 'localhost']

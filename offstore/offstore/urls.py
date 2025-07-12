@@ -70,7 +70,6 @@ schema_view = get_schema_view(
 )
 
 urlpatterns = [
-    path('', lambda request: JsonResponse({"message": "Bienvenue sur l'API Offstore"})),
     path('admin/', admin.site.urls),
     path('api/', include('Users.urls')),
     path('api/payments/', include('manage_pay.urls')),

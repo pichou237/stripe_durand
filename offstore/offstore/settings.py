@@ -105,6 +105,21 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'offstore.wsgi.application'
 
+STATICFILES_FINDERS = [
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+]
+
+SWAGGER_SETTINGS = {
+    'USE_SESSION_AUTH': False,
+    'LOGIN_URL': '/admin/login/',
+    'LOGOUT_URL': '/admin/logout/',
+    'DEFAULT_MODEL_RENDERING': 'example',
+    'DOC_EXPANSION': 'none',
+    'OPERATIONS_SORTER': 'alpha',
+}
+
+
 
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases

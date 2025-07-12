@@ -27,7 +27,6 @@ class UserRegisterView(GenericAPIView):
         serializer.is_valid(raise_exception=True)
         user = serializer.save()
 
-        # Construire les données pour l'email
         email_data = {
             'email_subject': 'Welcome to our platform!',
             'email_body': f"Hi {user.first_name},\n\nThank you for registering on our platform.",
@@ -74,16 +73,19 @@ class LoginUserView(GenericAPIView):
         serializer = self.serializer_class(data=request.data, context={'request': request})
         serializer.is_valid(raise_exception=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
+
 @method_decorator(csrf_exempt, name='dispatch')
 class UserDetailView(RetrieveAPIView):
     queryset = User.objects.all()
     serializer_class = UserRegisterSerializer
     permission_classes = [IsUser, IsManager]
+
 @method_decorator(csrf_exempt, name='dispatch')
 class UpdateProfileView(UpdateAPIView):
     queryset = User.objects.all()
     serializer_class = UserRegisterSerializer
     permission_classes = [IsUser]
+
 @method_decorator(csrf_exempt, name='dispatch')
 class PasswordResetRequestView(APIView):
     permission_classes = [AllowAny]
@@ -94,6 +96,7 @@ class PasswordResetRequestView(APIView):
         if serializer.is_valid():
             return Response({"message": "OTP envoyé avec succès."}, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 @method_decorator(csrf_exempt, name='dispatch')
 class PasswordResetConfirmView(APIView):
     permission_classes = [AllowAny]
@@ -107,7 +110,6 @@ class PasswordResetConfirmView(APIView):
                 "uidb64": serializer.validated_data['uidb64'],
                 "token": serializer.validated_data['token']
             }, status=status.HTTP_200_OK)
-
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @method_decorator(csrf_exempt, name='dispatch')
